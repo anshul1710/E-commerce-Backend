@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import java.util.Date;
 @Entity
 public class OrderHistory {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -5,6 +5,7 @@ import com.ecom.shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Set;
 
 
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -71,4 +72,13 @@ ProductController
     {
         return productService.changeProductDetails(products);
     }
+    @GetMapping("/search/{searchedItem}")
+    public Set<products> searchItem(@PathVariable("searchedItem") String searchedItem) {
+        Set<products> prod = productService.getSearchedData(searchedItem);
+        for (int i = 0; i < prod.size(); i++) {
+            System.out.println(prod);
+        }
+        return prod;
+    }
+
 }

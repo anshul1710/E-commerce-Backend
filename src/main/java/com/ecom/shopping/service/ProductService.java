@@ -5,7 +5,9 @@ import com.ecom.shopping.model.products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Component
@@ -58,5 +60,20 @@ public class ProductService{
         oldProduct.setDetails(products.getDetails());
         productsRepository.saveAndFlush(oldProduct);
         return oldProduct;
+    }
+
+    public Set<products> getSearchedData(String searchedItem) {
+        List<products> productsList = productsRepository.findAll();
+        Set<products> result = new HashSet<>();
+
+        for(int i=0; i<productsList.size(); i++) {
+            if(productsList.get(i).getName().toLowerCase().contains(searchedItem.toLowerCase()) ||
+                    productsList.get(i).getCategory().toLowerCase().contains(searchedItem.toLowerCase()) ||
+                    productsList.get(i).getDetails().toLowerCase().contains(searchedItem.toLowerCase())) {
+
+                result.add(productsList.get(i));
+            }
+        }
+        return result;
     }
 }
